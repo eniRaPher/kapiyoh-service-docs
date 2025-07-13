@@ -25,53 +25,152 @@ meta:
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Kapiyoh Service API is a modern RESTful API designed to empower developers and businesses to seamlessly integrate with the Kapiyoh ecosystem.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+Our API provides secure, flexible, and easy-to-use endpoints for managing resources, authenticating users, and building scalable applications.
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Whether you're creating internal tools, mobile apps, or third-party integrations, Kapiyoh Service API helps you ship features faster and maintain a robust service backbone.
 
 # Authentication
+Kapiyoh Service API uses Session + Cookie Authentication to manage secure access to protected resources.
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+# How it Works
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
+curl -i -c cookies.txt \
+  -X POST https://api.kapiyoh.com/sign_in \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "johndoe",
+    "password": "secret"
+  }'
 ```
 
-```javascript
-const kittn = require('kittn');
+1️⃣ Sign In
+Clients authenticate by sending valid login credentials (e.g. username & password) to the /sign_in endpoint.
+If authentication is successful, the server creates a session and sets a secure HTTP cookie (_kapiyoh_session) in the response.
 
-let api = kittn.authorize('meowmeowmeow');
+2️⃣ Session Cookie
+On subsequent requests, the client must include the session cookie (_kapiyoh_session) automatically (your HTTP client or browser does this by default).
+The server verifies this cookie to identify the user and authorize the request.
+
+3️⃣ Sign Out
+Clients can invalidate the session by calling the /sign_out endpoint.
+This clears the session on the server and removes the cookie.
+
+# Admins
+
+## Get All Admins
+This endpoint retrieves all Admins.
+
+### HTTP Request
+This feature is not supported.
+
+### Query Parameters
+This feature is not supported.
+
+## Register
+```shell
+curl --location 'http://example.com/admins' \
+--header 'Content-Type: application/json' \
+--data '{
+  "admin": {
+    "username": "username",
+    "password": "supersecret",
+    "password_confirmation": "supersecret",
+    "first_name": "first name",
+    "last_name: "last name",
+    "phone": "0988888888",
+    "address": "48 bkk thailand"
+  }
+}'
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> The above command returns JSON structured like this:
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+```json
+{
+    "id": 1,
+    "first_name": "first name",
+    "last_name": "last name",
+    "username": "username",
+    "phone": "0988888888",
+    "address": "48 bkk thailand"
+}
+```
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+This endpoint register Admin.
 
-`Authorization: meowmeowmeow`
+### HTTP Request
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+`POST http://example.com/admins`
 
-# Kittens
+### Query Parameters
+
+Parameter | Require | Description
+--------- | ------- | -----------
+username | true | Must be uniq
+password | true | Password
+password_confirmation | true | The password confirmation must match the password.
+first_name | true | First name
+last_name | true | Last name
+phone | false | Phone
+address | false | Address
+
+## Sign in
+```shell
+curl --location 'http://localhost:3000/admins/sign_in' \
+--header 'Content-Type: application/json' \
+--data '{
+    "admin": {
+        "username": "s3",
+        "password": "supersecret3"
+    }
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "first_name": "first name",
+    "last_name": "last name",
+    "username": "username",
+    "phone": "0988888888",
+    "address": "48 bkk thailand"
+}
+```
+
+This endpoint for Admin Sign in.
+
+### HTTP Request
+
+`POST http://example.com/admins/sign_in`
+
+### Query Parameters
+
+Parameter | Require | Description
+--------- | ------- | -----------
+username | true | Must be uniq
+password | true | Password
+
+## Sign out
+```shell
+curl --location --request DELETE 'http://localhost:3000/admins/sign_out' \
+--header 'Cookie: _kapiyoh_session=kapiyoh_session_dd; _session_id=session_id_ddd'
+```
+
+This endpoint for Admin Sign in.
+
+### HTTP Request
+`DELETE http://example.com/admins/sign_out`
+
+### Query Parameters
+NO
+
+
+<!-- # Kittens
 
 ## Get All Kittens
 
@@ -242,4 +341,4 @@ This endpoint deletes a specific kitten.
 Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to delete
-
+ -->

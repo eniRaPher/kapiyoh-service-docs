@@ -77,7 +77,7 @@ GEM
     middleman-sprockets (4.1.1)
       middleman-core (~> 4.0)
       sprockets (>= 3.0)
-    middleman-syntax (3.3.0)
+    middleman-syntax (3.5.0)
       middleman-core (>= 3.2)
       rouge (~> 3.2)
     mini_portile2 (2.8.0)
@@ -128,7 +128,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  middleman (~> 4.4)
+  middleman (~> 4.3)
   middleman-autoprefixer (~> 3.0)
   middleman-sprockets (~> 4.1)
   middleman-syntax (~> 3.2)
