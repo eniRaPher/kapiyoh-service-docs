@@ -269,7 +269,7 @@ phone | false | Phone
 salary | false | Salary
 
 
-## Delete a Specific Kitten
+## Delete a Specific Employee
 ```shell
 curl --location --request DELETE 'http://example.com/employees/<ID>'
 ```
