@@ -157,8 +157,7 @@ password | true | Password
 
 ## Sign out
 ```shell
-curl --location --request DELETE 'http://localhost:3000/admins/sign_out' \
---header 'Cookie: _kapiyoh_session=kapiyoh_session_dd; _session_id=session_id_ddd'
+curl --location --request DELETE 'http://localhost:3000/admins/sign_out'
 ```
 
 This endpoint for Admin Sign in.
@@ -168,6 +167,165 @@ This endpoint for Admin Sign in.
 
 ### Query Parameters
 NO
+
+# Employees
+
+## Get All Employees
+```shell
+curl --location 'http://example.com/employees'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "employees": [
+        {
+            "id": 2,
+            "first_name": "ggff",
+            "last_name": "ff",
+            "phone": "098",
+            "salary": 15000
+        }
+    ]
+}
+```
+
+This endpoint retrieves all Employees.
+
+### HTTP Request
+`GET http://example.com/employees`
+
+### Query Parameters
+NO
+
+## Get a Specific Employee
+
+```shell
+curl --location 'http://example.com/employees/<ID>' 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "first_name": "first name",
+    "last_name": "last name",
+    "phone": "0984333333",
+    "salary": 15000
+}
+```
+
+This endpoint retrieves a specific employee.
+
+### HTTP Request
+`GET http://example.com/employees/<ID>`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+ID | The ID of the Employee to retrieve
+
+## Update a Specific Employee
+
+```shell
+curl --location --request PUT 'http://example.com/employees/<ID>' \
+--header 'Content-Type: application/json' \
+--data '{
+ "first_name": "first name 2",
+ "last_name": "last name 2",
+ "phone": "0980999999",
+ "salary": 15000
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "first_name": "first name 2",
+    "last_name": "last name 2",
+    "phone": "0980999999",
+    "salary": 15000,
+    "id": 1,
+    "created_at": "2025-07-12T06:45:44.738Z",
+    "updated_at": "2025-07-13T14:43:18.338Z"
+}
+```
+
+This endpoint retrieves a specific employee.
+
+### HTTP Request
+`PUT http://example.com/employees/<ID>`
+
+### Query Parameters
+Parameter | Require | Description
+--------- | ------- | -----------
+ID | true | The ID of the Employee
+first_name | false | First name
+last_name | false | Last name
+phone | false | Phone
+salary | false | Salary
+
+
+## Delete a Specific Kitten
+```shell
+curl --location --request DELETE 'http://example.com/employees/<ID>'
+```
+
+This endpoint deletes a specific Employee.
+
+### HTTP Request
+
+`DELETE http://example.com/employees/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the employee to delete
+
+
+## Create a Employee
+```shell
+curl --location 'http://localhost:3000/employees' \
+--header 'Content-Type: application/json' \
+--data '{
+ "first_name": "first name",
+ "last_name": "last name",
+ "phone": "0988888888",
+ "salary": 15000
+}'
+```
+
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "id": 1,
+    "first_name": "first name",
+    "last_name": "last name",
+    "phone": "0988888888",
+    "salary": 15000,
+    "created_at": "2025-07-12T06:45:44.738Z",
+    "updated_at": "2025-07-13T14:43:18.338Z"
+}
+```
+
+This endpoint create a employee.
+
+### HTTP Request
+`POST http://example.com/employees`
+
+### Query Parameters
+Parameter | Require | Description
+--------- | ------- | -----------
+first_name | false | First name
+last_name | false | Last name
+phone | false | Phone
+salary | false | Salary
 
 
 <!-- # Kittens
