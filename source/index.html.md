@@ -60,18 +60,9 @@ This clears the session on the server and removes the cookie.
 
 # Admins
 
-## Get All Admins
-This endpoint retrieves all Admins.
-
-### HTTP Request
-This feature is not supported.
-
-### Query Parameters
-This feature is not supported.
-
 ## Register
 ```shell
-curl --location 'http://example.com/admins' \
+curl --location 'http://example.com/admins.json' \
 --header 'Content-Type: application/json' \
 --data '{
   "admin": {
@@ -90,12 +81,14 @@ curl --location 'http://example.com/admins' \
 
 ```json
 {
+  "admin":{
     "id": 1,
     "first_name": "first name",
     "last_name": "last name",
     "username": "username",
     "phone": "0988888888",
     "address": "48 bkk thailand"
+  }
 }
 ```
 
@@ -103,7 +96,7 @@ This endpoint register Admin.
 
 ### HTTP Request
 
-`POST http://example.com/admins`
+`POST http://example.com/admins.json`
 
 ### Query Parameters
 
@@ -119,7 +112,7 @@ address | false | Address
 
 ## Sign in
 ```shell
-curl --location 'http://localhost:3000/admins/sign_in' \
+curl --location 'http://example.com/admins/sign_in.json' \
 --header 'Content-Type: application/json' \
 --data '{
     "admin": {
@@ -133,12 +126,14 @@ curl --location 'http://localhost:3000/admins/sign_in' \
 
 ```json
 {
+  "admin": {
     "id": 1,
     "first_name": "first name",
     "last_name": "last name",
     "username": "username",
     "phone": "0988888888",
     "address": "48 bkk thailand"
+  }
 }
 ```
 
@@ -146,7 +141,7 @@ This endpoint for Admin Sign in.
 
 ### HTTP Request
 
-`POST http://example.com/admins/sign_in`
+`POST http://example.com/admins/sign_in.json`
 
 ### Query Parameters
 
@@ -157,22 +152,143 @@ password | true | Password
 
 ## Sign out
 ```shell
-curl --location --request DELETE 'http://localhost:3000/admins/sign_out'
+curl --location --request DELETE 'http://localhost:3000/admins/sign_out.json'
 ```
 
 This endpoint for Admin Sign in.
 
 ### HTTP Request
-`DELETE http://example.com/admins/sign_out`
+`DELETE http://example.com/admins/sign_out.json`
 
 ### Query Parameters
 NO
+
+## Get All Admins
+```shell
+curl --location 'http://example.com/<shop_slug>/admins.json'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "admins": [
+        {
+            "id": 1,
+            "first_name": "double",
+            "last_name": "test",
+            "username": "doubles",
+            "phone": 0988888888,
+            "address": "48 bkk thailand"
+        }
+    ]
+}
+```
+This endpoint retrieves all Admins.
+
+### HTTP Request
+`GET http://example.com/<shop_slug>/admins.json`
+
+### Query Parameters
+NO
+
+## Get a Specific Admin
+
+```shell
+curl --location 'http://example.com/<shop_slug>/admins/<ID>.json' 
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "admin": {
+        "id": 1,
+        "first_name": "double",
+        "last_name": "test",
+        "username": "doubles",
+        "phone": 0988888888,
+        "address": "48 bkk thailand"
+    }
+}
+```
+
+This endpoint retrieves a specific admin.
+
+### HTTP Request
+`GET http://example.com/<shop_slug>/admins/<ID>.json`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+ID | The ID of the Admin
+
+## Update a Specific Admin
+
+```shell
+curl --location --request PUT 'http://example.com/<shop_slug>/admins/<ID>.json' \
+--header 'Content-Type: application/json' \
+--data '{
+ "admin": {
+   "first_name": "first name 2",
+   "last_name": "last name 2",
+   "phone": "0980999999",
+   "address": "48 bkk thailand"
+  }
+}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "admin": {
+        "id": 1,
+        "first_name": "first name 2",
+        "last_name": "last name 2",
+        "username": "doubles",
+        "phone": "0980999999",
+        "address": "48 bkk thailand"
+    }
+}
+```
+
+This endpoint update a specific admin.
+
+### HTTP Request
+`PUT http://example.com/<shop_slug>/admins/<ID>.json`
+
+### Query Parameters
+Parameter | Require | Description
+--------- | ------- | -----------
+ID | true | The ID of the Admin
+first_name | false | First name
+last_name | false | Last name
+phone | false | Phone
+address | false | Address
+
+## Delete a Specific Admin
+```shell
+curl --location --request DELETE 'http://example.com/<shop_slug>/admins/<ID>.json'
+```
+
+This endpoint deletes a specific admin.
+
+### HTTP Request
+
+`DELETE http://example.com/<shop_slug>/admins/<ID>.json`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the admin
 
 # Employees
 
 ## Get All Employees
 ```shell
-curl --location 'http://example.com/employees'
+curl --location 'http://example.com/<shop_slug>/employees.json'
 ```
 
 > The above command returns JSON structured like this:
@@ -194,7 +310,7 @@ curl --location 'http://example.com/employees'
 This endpoint retrieves all Employees.
 
 ### HTTP Request
-`GET http://example.com/employees`
+`GET http://example.com/<shop_slug>employees.json`
 
 ### Query Parameters
 NO
@@ -202,25 +318,27 @@ NO
 ## Get a Specific Employee
 
 ```shell
-curl --location 'http://example.com/employees/<ID>' 
+curl --location 'http://example.com/<shop_slug>/employees/<ID>.json' 
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
+  "employee":{
     "id": 1,
     "first_name": "first name",
     "last_name": "last name",
     "phone": "0984333333",
     "salary": 15000
+  }
 }
 ```
 
 This endpoint retrieves a specific employee.
 
 ### HTTP Request
-`GET http://example.com/employees/<ID>`
+`GET http://example.com/<shop_slug>/employees/<ID>.json`
 
 ### Query Parameters
 Parameter | Description
@@ -230,13 +348,15 @@ ID | The ID of the Employee to retrieve
 ## Update a Specific Employee
 
 ```shell
-curl --location --request PUT 'http://example.com/employees/<ID>' \
+curl --location --request PUT 'http://example.com/<shop_slug>/employees/<ID>.json' \
 --header 'Content-Type: application/json' \
 --data '{
- "first_name": "first name 2",
- "last_name": "last name 2",
- "phone": "0980999999",
- "salary": 15000
+ "employee": {
+   "first_name": "first name 2",
+   "last_name": "last name 2",
+   "phone": "0980999999",
+   "salary": 15000
+  }
 }'
 ```
 
@@ -244,6 +364,7 @@ curl --location --request PUT 'http://example.com/employees/<ID>' \
 
 ```json
 {
+  "employee":{
     "first_name": "first name 2",
     "last_name": "last name 2",
     "phone": "0980999999",
@@ -251,13 +372,14 @@ curl --location --request PUT 'http://example.com/employees/<ID>' \
     "id": 1,
     "created_at": "2025-07-12T06:45:44.738Z",
     "updated_at": "2025-07-13T14:43:18.338Z"
+  }
 }
 ```
 
 This endpoint retrieves a specific employee.
 
 ### HTTP Request
-`PUT http://example.com/employees/<ID>`
+`PUT http://example.com/<shop_slug>/employees/<ID>.json`
 
 ### Query Parameters
 Parameter | Require | Description
@@ -271,14 +393,14 @@ salary | false | Salary
 
 ## Delete a Specific Employee
 ```shell
-curl --location --request DELETE 'http://example.com/employees/<ID>'
+curl --location --request DELETE 'http://example.com/<shop_slug>/employees/<ID>.json'
 ```
 
 This endpoint deletes a specific Employee.
 
 ### HTTP Request
 
-`DELETE http://example.com/employees/<ID>`
+`DELETE http://example.com/<shop_slug>/employees/<ID>.json`
 
 ### URL Parameters
 
@@ -289,13 +411,15 @@ ID | The ID of the employee to delete
 
 ## Create a Employee
 ```shell
-curl --location 'http://localhost:3000/employees' \
+curl --location 'http://example.com/<shop_slug>/employees.json' \
 --header 'Content-Type: application/json' \
 --data '{
- "first_name": "first name",
- "last_name": "last name",
- "phone": "0988888888",
- "salary": 15000
+ "employee": {
+   "first_name": "first name",
+   "last_name": "last name",
+   "phone": "0988888888",
+   "salary": 15000
+  }
 }'
 ```
 
@@ -304,6 +428,7 @@ curl --location 'http://localhost:3000/employees' \
 
 ```json
 {
+  "employee": {
     "id": 1,
     "first_name": "first name",
     "last_name": "last name",
@@ -311,13 +436,14 @@ curl --location 'http://localhost:3000/employees' \
     "salary": 15000,
     "created_at": "2025-07-12T06:45:44.738Z",
     "updated_at": "2025-07-13T14:43:18.338Z"
+  }
 }
 ```
 
 This endpoint create a employee.
 
 ### HTTP Request
-`POST http://example.com/employees`
+`POST http://example.com/<shop_slug>/employees.json`
 
 ### Query Parameters
 Parameter | Require | Description
