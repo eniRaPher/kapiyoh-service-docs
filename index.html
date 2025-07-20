@@ -328,9 +328,6 @@
             <a href="#admins" class="toc-h1 toc-link" data-title="Admins">Admins</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-admins" class="toc-h2 toc-link" data-title="Get All Admins">Get All Admins</a>
-                  </li>
-                  <li>
                     <a href="#register" class="toc-h2 toc-link" data-title="Register">Register</a>
                   </li>
                   <li>
@@ -338,6 +335,18 @@
                   </li>
                   <li>
                     <a href="#sign-out" class="toc-h2 toc-link" data-title="Sign out">Sign out</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-admins" class="toc-h2 toc-link" data-title="Get All Admins">Get All Admins</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-specific-admin" class="toc-h2 toc-link" data-title="Get a Specific Admin">Get a Specific Admin</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-specific-admin" class="toc-h2 toc-link" data-title="Update a Specific Admin">Update a Specific Admin</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-specific-admin" class="toc-h2 toc-link" data-title="Delete a Specific Admin">Delete a Specific Admin</a>
                   </li>
               </ul>
           </li>
@@ -400,13 +409,7 @@ The server verifies this cookie to identify the user and authorize the request.<
 <p>3️⃣ Sign Out
 Clients can invalidate the session by calling the /sign_out endpoint.
 This clears the session on the server and removes the cookie.</p>
-<h1 id='admins'>Admins</h1><h2 id='get-all-admins'>Get All Admins</h2>
-<p>This endpoint retrieves all Admins.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p>This feature is not supported.</p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<p>This feature is not supported.</p>
-<h2 id='register'>Register</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/admins'</span> <span class="se">\</span>
+<h1 id='admins'>Admins</h1><h2 id='register'>Register</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/admins.json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
   "admin": {
@@ -424,18 +427,20 @@ This clears the session on the server and removes the cookie.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"admin"</span><span class="p">:{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first name"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last name"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0988888888"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48 bkk thailand"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint register Admin.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST http://example.com/admins</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST http://example.com/admins.json</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -479,7 +484,7 @@ This clears the session on the server and removes the cookie.</p>
 <td>Address</td>
 </tr>
 </tbody></table>
-<h2 id='sign-in'>Sign in</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://localhost:3000/admins/sign_in'</span> <span class="se">\</span>
+<h2 id='sign-in'>Sign in</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/admins/sign_in.json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
     "admin": {
@@ -492,18 +497,20 @@ This clears the session on the server and removes the cookie.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"admin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first name"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last name"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0988888888"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48 bkk thailand"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint for Admin Sign in.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>POST http://example.com/admins/sign_in</code></p>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST http://example.com/admins/sign_in.json</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -522,14 +529,147 @@ This clears the session on the server and removes the cookie.</p>
 <td>Password</td>
 </tr>
 </tbody></table>
-<h2 id='sign-out'>Sign out</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:3000/admins/sign_out'</span>
+<h2 id='sign-out'>Sign out</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://localhost:3000/admins/sign_out.json'</span>
 </code></pre></div>
 <p>This endpoint for Admin Sign in.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE http://example.com/admins/sign_out.json</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<p>NO</p>
+<h2 id='get-all-admins'>Get All Admins</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/&lt;shop_slug&gt;/admins.json'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"admins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doubles"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="mi">0988888888</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48 bkk thailand"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves all Admins.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>DELETE http://example.com/admins/sign_out</code></p>
+<p><code>GET http://example.com/&lt;shop_slug&gt;/admins.json</code></p>
 <h3 id='query-parameters-4'>Query Parameters</h3>
 <p>NO</p>
-<h1 id='employees'>Employees</h1><h2 id='get-all-employees'>Get All Employees</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/employees'</span>
+<h2 id='get-a-specific-admin'>Get a Specific Admin</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/&lt;shop_slug&gt;/admins/&lt;ID&gt;.json'</span> 
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"admin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doubles"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="mi">0988888888</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48 bkk thailand"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves a specific admin.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET http://example.com/&lt;shop_slug&gt;/admins/&lt;ID&gt;.json</code></p>
+<h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the Admin</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-specific-admin'>Update a Specific Admin</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PUT <span class="s1">'http://example.com/&lt;shop_slug&gt;/admins/&lt;ID&gt;.json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'{
+ "admin": {
+   "first_name": "first name 2",
+   "last_name": "last name 2",
+   "phone": "0980999999",
+   "address": "48 bkk thailand"
+  }
+}'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"admin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first name 2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last name 2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doubles"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0980999999"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48 bkk thailand"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint update a specific admin.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>PUT http://example.com/&lt;shop_slug&gt;/admins/&lt;ID&gt;.json</code></p>
+<h3 id='query-parameters-6'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Require</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>true</td>
+<td>The ID of the Admin</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>false</td>
+<td>First name</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>false</td>
+<td>Last name</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>false</td>
+<td>Phone</td>
+</tr>
+<tr>
+<td>address</td>
+<td>false</td>
+<td>Address</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-specific-admin'>Delete a Specific Admin</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://example.com/&lt;shop_slug&gt;/admins/&lt;ID&gt;.json'</span>
+</code></pre></div>
+<p>This endpoint deletes a specific admin.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>DELETE http://example.com/&lt;shop_slug&gt;/admins/&lt;ID&gt;.json</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the admin</td>
+</tr>
+</tbody></table>
+<h1 id='employees'>Employees</h1><h2 id='get-all-employees'>Get All Employees</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/&lt;shop_slug&gt;/employees.json'</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -547,27 +687,29 @@ This clears the session on the server and removes the cookie.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves all Employees.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET http://example.com/employees</code></p>
-<h3 id='query-parameters-5'>Query Parameters</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>GET http://example.com/&lt;shop_slug&gt;employees.json</code></p>
+<h3 id='query-parameters-7'>Query Parameters</h3>
 <p>NO</p>
-<h2 id='get-a-specific-employee'>Get a Specific Employee</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/employees/&lt;ID&gt;'</span> 
+<h2 id='get-a-specific-employee'>Get a Specific Employee</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/&lt;shop_slug&gt;/employees/&lt;ID&gt;.json'</span> 
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"employee"</span><span class="p">:{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first name"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last name"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0984333333"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"salary"</span><span class="p">:</span><span class="w"> </span><span class="mi">15000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves a specific employee.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
-<p><code>GET http://example.com/employees/&lt;ID&gt;</code></p>
-<h3 id='query-parameters-6'>Query Parameters</h3>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET http://example.com/&lt;shop_slug&gt;/employees/&lt;ID&gt;.json</code></p>
+<h3 id='query-parameters-8'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -579,19 +721,22 @@ This clears the session on the server and removes the cookie.</p>
 <td>The ID of the Employee to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='update-a-specific-employee'>Update a Specific Employee</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PUT <span class="s1">'http://example.com/employees/&lt;ID&gt;'</span> <span class="se">\</span>
+<h2 id='update-a-specific-employee'>Update a Specific Employee</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> PUT <span class="s1">'http://example.com/&lt;shop_slug&gt;/employees/&lt;ID&gt;.json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
- "first_name": "first name 2",
- "last_name": "last name 2",
- "phone": "0980999999",
- "salary": 15000
+ "employee": {
+   "first_name": "first name 2",
+   "last_name": "last name 2",
+   "phone": "0980999999",
+   "salary": 15000
+  }
 }'</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"employee"</span><span class="p">:{</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first name 2"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last name 2"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0980999999"</span><span class="p">,</span><span class="w">
@@ -599,12 +744,13 @@ This clears the session on the server and removes the cookie.</p>
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-07-12T06:45:44.738Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-07-13T14:43:18.338Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves a specific employee.</p>
-<h3 id='http-request-7'>HTTP Request</h3>
-<p><code>PUT http://example.com/employees/&lt;ID&gt;</code></p>
-<h3 id='query-parameters-7'>Query Parameters</h3>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>PUT http://example.com/&lt;shop_slug&gt;/employees/&lt;ID&gt;.json</code></p>
+<h3 id='query-parameters-9'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -638,12 +784,12 @@ This clears the session on the server and removes the cookie.</p>
 <td>Salary</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-employee'>Delete a Specific Employee</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://example.com/employees/&lt;ID&gt;'</span>
+<h2 id='delete-a-specific-employee'>Delete a Specific Employee</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> DELETE <span class="s1">'http://example.com/&lt;shop_slug&gt;/employees/&lt;ID&gt;.json'</span>
 </code></pre></div>
 <p>This endpoint deletes a specific Employee.</p>
-<h3 id='http-request-8'>HTTP Request</h3>
-<p><code>DELETE http://example.com/employees/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<h3 id='http-request-11'>HTTP Request</h3>
+<p><code>DELETE http://example.com/&lt;shop_slug&gt;/employees/&lt;ID&gt;.json</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -655,19 +801,22 @@ This clears the session on the server and removes the cookie.</p>
 <td>The ID of the employee to delete</td>
 </tr>
 </tbody></table>
-<h2 id='create-a-employee'>Create a Employee</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://localhost:3000/employees'</span> <span class="se">\</span>
+<h2 id='create-a-employee'>Create a Employee</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'http://example.com/&lt;shop_slug&gt;/employees.json'</span> <span class="se">\</span>
 <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data</span> <span class="s1">'{
- "first_name": "first name",
- "last_name": "last name",
- "phone": "0988888888",
- "salary": 15000
+ "employee": {
+   "first_name": "first name",
+   "last_name": "last name",
+   "phone": "0988888888",
+   "salary": 15000
+  }
 }'</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"employee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first name"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last name"</span><span class="p">,</span><span class="w">
@@ -675,12 +824,13 @@ This clears the session on the server and removes the cookie.</p>
     </span><span class="nl">"salary"</span><span class="p">:</span><span class="w"> </span><span class="mi">15000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-07-12T06:45:44.738Z"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-07-13T14:43:18.338Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint create a employee.</p>
-<h3 id='http-request-9'>HTTP Request</h3>
-<p><code>POST http://example.com/employees</code></p>
-<h3 id='query-parameters-8'>Query Parameters</h3>
+<h3 id='http-request-12'>HTTP Request</h3>
+<p><code>POST http://example.com/&lt;shop_slug&gt;/employees.json</code></p>
+<h3 id='query-parameters-10'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
